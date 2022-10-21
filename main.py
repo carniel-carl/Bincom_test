@@ -26,8 +26,6 @@ def query_db(query, one=False):
     return r if r else None if one else r
 
 
-#
-
 def check_polling_units_query(local):
     query = f"""
             SELECT polling_unit_name, polling_unit_description, polling_unit_number, lat, long, lga_name, ward_name
@@ -40,12 +38,14 @@ def check_polling_units_query(local):
     return query
 
 
+
 def check_result_query(area):
     query = f"""
-            SELECT party_abbreviation, party_score, lga.lga_name
-            FROM lga
-            INNER JOIN announced_lga_results ON lga.lga_id = announced_lga_results.lga_name
-            WHERE lga.lga_name = '{area}'
+            SELECT party_abbreviation, party_score
+            FROM polling_unit
+            INNER JOIN announced_pu_results ON polling_unit.uniqueid = announced_pu_results.polling_unit_uniqueid
+            INNER JOIN lga ON polling_unit.lga_id = lga.lga_id
+            WHERE announced_pu_results.polling_unit_uniqueid = polling_unit.uniqueid
             """
     return query
 

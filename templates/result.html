@@ -3,6 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Result</title>
+        <style>table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  padding: 15px;
+}
+    </style>
 </head>
 <body>
 <h1>All Polling Units Results</h1>
@@ -11,14 +17,12 @@
     <tr>
         <th>Party Abbreviation</th>
         <th>Party Score</th>
-        <th>Local Government </th>
 
     </tr>
     {% for i in result %}
     <tr>
         <td>{{ i.party_abbreviation }}</td>
         <td>{{ i.party_score }}</td>
-        <td>{{ i.lga.lga_name }}</td>
     </tr>
     {% endfor %}
 </table>
