@@ -40,6 +40,16 @@ def check_polling_units_query(local):
     return query
 
 
+def check_result_query(area):
+    query = f"""
+            SELECT party_abbreviation, party_score, lga.lga_name
+            FROM lga
+            INNER JOIN announced_lga_results ON lga.lga_id = announced_lga_results.lga_name
+            WHERE lga.lga_name = '{area}'
+            """
+    return query
+
+
 @app.route("/", methods=['POST', 'GET'])
 def home():
     query = "SELECT lga_name FROM lga"
@@ -52,10 +62,18 @@ def home():
 
 @app.route("/polling", methods=['POST', 'GET'])
 def polling():
-    area = request.form.get('local').title()
+    area = request.form.get('local')
     query = check_polling_units_query(local=area)
     polling_units = query_db(query=query)
     return render_template("polling.html", row=polling_units)
+
+
+@app.route("/result", methods=['POST', 'GET'])
+def result():
+    area = request.form.get('local')
+    query = check_result_query(area)
+    lga_result = query_db(query=query)
+    return render_template("result.html", result=lga_result)
 
 
 if __name__ == "__main__":

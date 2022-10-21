@@ -10,9 +10,9 @@
     Check Polling units in Delta State, Local Government
 </h1>
 <form method="post" action="{{ url_for('polling') }}">
-    <label for="lga">Choose a Local Government Area:</label>
+    <label for="local">Choose a Local Government Area:</label>
 
-    <select name="local" >
+    <select name="local" id="local">
         {% for name in lga %}
         <option value="{{ name.lga_name}}">{{ name.lga_name}}</option>
         {% endfor %}
@@ -25,7 +25,7 @@
     Check result of all Polling units in a Local Government
 </h1>
 
-<form action="{{ url_for('home') }}">
+<form action="{{ url_for('result') }}">
     <label for="lga">Choose a Local Government Area:</label>
 
     <select name="lga" id="lga">
