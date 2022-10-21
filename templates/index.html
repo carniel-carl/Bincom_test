@@ -9,10 +9,32 @@
 <h1>
     Search Polling units in Delta State, Local Government
 </h1>
-<form method="post" , action="{{ url_for('polling') }}">
-    <label>Enter a Local Government:</label>
-    <input type="text" name="local">
-    <input type="submit">
+<form method="post" action="{{ url_for('polling') }}">
+    <label for="lga">Choose a Local Government Area:</label>
+
+    <select name="local" >
+        {% for name in lga %}
+        <option value="{{ name.lga_name}}">{{ name.lga_name}}</option>
+        {% endfor %}
+    </select>
+
+    <input type="submit" value="Submit">
+</form>
+<br>
+<h1>
+    Check result of all Polling units in a Local Government
+</h1>
+
+<form action="{{ url_for('home') }}">
+    <label for="lga">Choose a Local Government Area:</label>
+
+    <select name="lga" id="lga">
+        {% for name in lga %}
+        <option value="{{ name.lga_name}}">{{ name.lga_name}}</option>
+        {% endfor %}
+    </select>
+
+    <input type="submit" value="Submit">
 </form>
 
 </body>

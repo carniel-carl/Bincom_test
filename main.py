@@ -42,9 +42,14 @@ def get_local_government_query(local):
 
 @app.route("/", methods=['POST', 'GET'])
 def home():
+    query = f"""
+                SELECT lga_name
+                FROM lga
+    """
+    LGA = query_db(query=query)
     if request.method == "POST":
         return redirect(url_for('polling'))
-    return render_template("index.html")
+    return render_template("index.html", lga=LGA)
 
 
 @app.route("/polling", methods=['POST', 'GET'])
