@@ -28,7 +28,7 @@ def query_db(query, one=False):
 
 #
 
-def get_local_government_query(local):
+def check_polling_units_query(local):
     query = f"""
             SELECT polling_unit_name, polling_unit_description, polling_unit_number, lat, long, lga_name, ward_name
             FROM lga
@@ -42,10 +42,8 @@ def get_local_government_query(local):
 
 @app.route("/", methods=['POST', 'GET'])
 def home():
-    query = f"""
-                SELECT lga_name
-                FROM lga
-    """
+    query = "SELECT lga_name FROM lga"
+
     LGA = query_db(query=query)
     if request.method == "POST":
         return redirect(url_for('polling'))
@@ -55,7 +53,7 @@ def home():
 @app.route("/polling", methods=['POST', 'GET'])
 def polling():
     area = request.form.get('local').title()
-    query = get_local_government_query(local=area)
+    query = check_polling_units_query(local=area)
     polling_units = query_db(query=query)
     return render_template("polling.html", row=polling_units)
 
