@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Polling Units</title>
+    <style>table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  padding: 15px;
+}
+
+
+    </style>
+</head>
+<body>
+<h1>Polling Units</h1>
+<br>
+<table>
+    <tr>
+        <th>Polling Unit Number</th>
+        <th>Polling Unit Name</th>
+        <th>Polling Unit Description</th>
+        <th>Latitude</th>
+        <th>Longitude</th>
+        <th>Ward Name</th>
+        <th>LGA Name</th>
+
+    </tr>
+    {% for dic in row %}
+    <tr>
+        <td>{{ dic.polling_unit_number }}</td>
+        <td>{{ dic.polling_unit_name }}</td>
+        <td>{{ dic.polling_unit_description }}</td>
+        <td>{{ dic.lat }}</td>
+        <td>{{ dic.long }}</td>
+        <td>{{ dic.ward_name }}</td>
+        <td>{{ dic.lga_name }}</td>
+
+    </tr>
+    {% endfor %}
+</table>
+</body>
+</html>
