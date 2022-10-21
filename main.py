@@ -2,8 +2,6 @@ from flask import Flask, render_template, redirect, url_for, request
 import sqlite3
 from sqlite3 import Error
 
-database = "election.db"
-
 try:
     with open("bincom_test.sql", "r") as sql_file:
         sql = sql_file.read()
